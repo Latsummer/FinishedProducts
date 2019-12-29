@@ -1,0 +1,16 @@
+﻿生成启动时间为 2019/12/29 21:22:37。
+     1>项目“C:\Users\morgan\Desktop\Mycode\扫雷_12_29\扫雷_12_29\扫雷_12_29.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt "扫雷game12_29.c" "扫雷test12_29.c"
+         扫雷test12_29.c
+         扫雷game12_29.c
+         正在生成代码...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\morgan\Desktop\Mycode\扫雷_12_29\Debug\扫雷_12_29.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\morgan\Desktop\Mycode\扫雷_12_29\Debug\扫雷_12_29.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\morgan\Desktop\Mycode\扫雷_12_29\Debug\扫雷_12_29.lib" /MACHINE:X86 "Debug\扫雷game12_29.obj"
+         "Debug\扫雷test12_29.obj"
+         扫雷_12_29.vcxproj -> C:\Users\morgan\Desktop\Mycode\扫雷_12_29\Debug\扫雷_12_29.exe
+     1>已完成生成项目“C:\Users\morgan\Desktop\Mycode\扫雷_12_29\扫雷_12_29\扫雷_12_29.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.50
