@@ -40,7 +40,7 @@ void Print(int* a, int size)
 {
 	int i = 0;
 	for (i = 0; i < size; i++)
-		printf("%d\n",a[i]);
+		printf("%6d%c",a[i],(i%10 == 9 || i == size - 1) ? '\n' : ' ');
 }
 
 int main()
