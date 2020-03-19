@@ -24,7 +24,9 @@ static void cmp(AddressBook* addr) //排序
 void Init(AddressBook* addr)//初始化通讯录
 {
 	addr->size = 0;
-	for (int i = 0; i < MAX_SZIE; i++)
+	addr->nums = 2;
+	addr->persons = (PersonalInfo*)malloc((addr->nums) * sizeof(PersonalInfo));
+	for (int i = 0; i < addr->nums; i++)
 	{
 		strcpy(addr->persons[i].name , "");
 		strcpy(addr->persons[i].phone , "");
@@ -51,12 +53,18 @@ int menu()//主菜单
 	return ret;
 }
 
+void Relloc_Per(AddressBook* addr)
+{
+	addr->nums += 20;
+	addr->persons = realloc(addr->persons, (addr->nums) * sizeof(PersonalInfo));
+}
+
+
 void Add_Person_Info(AddressBook* addr)//新增联系人
 {
-	if (addr->size >= MAX_SZIE)
+	if (addr->size >= addr->nums)
 	{
-		printf("联系人已满，无法新建联系人！\n");
-		return;
+		Relloc_Per(addr);
 	}
 
 	PersonalInfo* info = &addr->persons[addr->size];

@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #define MAX_SZIE 1000
 
 typedef struct PersonalInfo
@@ -15,8 +16,9 @@ typedef struct PersonalInfo
 
 typedef struct AddressBook
 {
-	PersonalInfo persons[MAX_SZIE];
+	PersonalInfo* persons;
 	int size;
+	int nums;
 }AddressBook;
 
 AddressBook address_book;
