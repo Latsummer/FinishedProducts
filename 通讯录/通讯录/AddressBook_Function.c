@@ -24,7 +24,7 @@ static void cmp(AddressBook* addr) //排序
 void Init(AddressBook* addr)//初始化通讯录
 {
 	addr->size = 0;
-	addr->nums = 2;
+	addr->nums = 20;
 	addr->persons = (PersonalInfo*)malloc((addr->nums) * sizeof(PersonalInfo));
 	for (int i = 0; i < addr->nums; i++)
 	{
