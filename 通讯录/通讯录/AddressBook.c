@@ -11,11 +11,72 @@
 
 #include"AddressBook.h"
 
+void Open(AddressBook* addr)
+{
+	FILE* addbook = fopen("C:book.txt", "r");
+	if (addbook == NULL)
+	{
+		perror("文件打开失败！");
+		return;
+	}
+	int i = 0;
+	while (1)
+	{
+		if (fgets(addr->persons[i].name, sizeof((addr->persons[i].name) - 1), addbook) == NULL)
+		{
+			return;
+		}
+		fgets(addr->persons[i].sex, sizeof((addr->persons[i].sex) - 1), addbook);
+		fgets(addr->persons[i].age, sizeof((addr->persons[i].age) - 1), addbook);
+		fgets(addr->persons[i].phone, sizeof((addr->persons[i].phone) - 1), addbook);
+		fgets(addr->persons[i].address, sizeof((addr->persons[i].address) - 1), addbook);
+		i++;
+     	addr->size++;
+	}
+	fclose(addbook);
+	return;
+}
 
+void Close(AddressBook* addr)
+{
+	FILE* addbook = fopen("C:book.txt", "w");
+	if (addbook == NULL)
+	{
+		perror("文件打开失败！");
+		return;
+	}
+	for (int i = 0; i < addr->size; i++)
+	{
+		char name[1024] = { 0 };
+		char sex[20] = { 0 };
+		char age[10] = { 0 };
+		char phone[1024] = { 0 };
+		char address[1024] = { 0 };
+		strcpy(name, addr->persons[i].name);
+		strcpy(sex, addr->persons[i].sex);
+		strcpy(age, addr->persons[i].age);
+		strcpy(phone, addr->persons[i].phone);
+		strcpy(address, addr->persons[i].address);
+		fputs(name, addbook);
+		//fputc(10, addbook);
+		fputs(sex, addbook);
+		//fputc(10, addbook);
+		fputs(age, addbook);
+		//fputc(10, addbook);
+		fputs(phone, addbook);
+		//fputc(10, addbook);
+		fputs(address, addbook);
+		//fputc(10, addbook);
+
+	}
+	fclose(addbook);
+	return;
+}
 
 int main()
 {
 	Init(&address_book);
+	Open(&address_book);
 	typedef void(*Func)(AddressBook*);
 	Func function[] = 
 	{
@@ -32,6 +93,7 @@ int main()
 		int choice = menu();
 		if (choice == 0)
 		{
+			Close(&address_book);
 			printf("bye!\n\n");
 			break;
 		}
