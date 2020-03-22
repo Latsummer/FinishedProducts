@@ -19,7 +19,14 @@ void Open(AddressBook* addr)
 		perror("文件打开失败！");
 		return;
 	}
-	int i = 0;
+
+	PersonalInfo buf = { 0 };
+	while (fread(&buf, sizeof(PersonalInfo), 1, addbook))
+	{
+		addr->persons[addr->size] = buf;
+		addr->size++;
+	}
+	/*int i = 0;
 	while (1)
 	{
 		if (fgets(addr->persons[i].name, sizeof((addr->persons[i].name) - 1), addbook) == NULL)
@@ -32,7 +39,7 @@ void Open(AddressBook* addr)
 		fgets(addr->persons[i].address, sizeof((addr->persons[i].address) - 1), addbook);
 		i++;
      	addr->size++;
-	}
+	}*/
 	fclose(addbook);
 	return;
 }
@@ -47,7 +54,8 @@ void Close(AddressBook* addr)
 	}
 	for (int i = 0; i < addr->size; i++)
 	{
-		char name[1024] = { 0 };
+		fwrite((addr->persons + i), sizeof(PersonalInfo), 1, addbook);
+		/*char name[1024] = { 0 };
 		char sex[20] = { 0 };
 		char age[10] = { 0 };
 		char phone[1024] = { 0 };
@@ -58,15 +66,15 @@ void Close(AddressBook* addr)
 		strcpy(phone, addr->persons[i].phone);
 		strcpy(address, addr->persons[i].address);
 		fputs(name, addbook);
-		//fputc(10, addbook);
+		fputc(10, addbook);
 		fputs(sex, addbook);
-		//fputc(10, addbook);
+		fputc(10, addbook);
 		fputs(age, addbook);
-		//fputc(10, addbook);
+		fputc(10, addbook);
 		fputs(phone, addbook);
-		//fputc(10, addbook);
+		fputc(10, addbook);
 		fputs(address, addbook);
-		//fputc(10, addbook);
+		fputc(10, addbook);*/
 
 	}
 	fclose(addbook);
