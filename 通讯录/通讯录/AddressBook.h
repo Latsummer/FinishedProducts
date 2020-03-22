@@ -24,6 +24,7 @@ typedef struct AddressBook
 AddressBook address_book;
 
 void Init(AddressBook* addr);
+void Relloc_Per(AddressBook* addr);
 
 int menu();
 

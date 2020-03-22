@@ -25,6 +25,10 @@ void Open(AddressBook* addr)
 	{
 		addr->persons[addr->size] = buf;
 		addr->size++;
+		if (addr->size >= addr->nums)
+		{
+			Relloc_Per(addr);
+		}
 	}
 	/*int i = 0;
 	while (1)
