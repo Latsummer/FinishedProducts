@@ -27,23 +27,24 @@ void StackPush(Stack* ps, STDataType data)
 // 出栈 
 void StackPop(Stack* ps)
 {
-	int empty = StackEmpty(ps);
+	/*int empty = StackEmpty(ps);
 	if (empty)
-		return;
-	ps->_top--;
+		return;*/
+	if (ps->_top)
+		ps->_top--;
 }
 // 获取栈顶元素 
 STDataType StackTop(Stack* ps)
 {
-	int empty = StackEmpty(ps);
+	/*int empty = StackEmpty(ps);
 	if (empty)
-		return;
+		return;*/
 	return ps->_a[ps->_top - 1];
 }
 // 获取栈中有效元素个数 
 int StackSize(Stack* ps)
 {
-	return ps->_top - 1;
+	return ps->_top;
 }
 // 检测栈是否为空，如果为空返回非零结果，如果不为空返回0 
 int StackEmpty(Stack* ps)

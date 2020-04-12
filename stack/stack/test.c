@@ -22,6 +22,7 @@ void test1(Stack* ps)
 	StackPush(ps, 3);
 	StackPush(ps, 2);
 	StackPush(ps, 1);
+	printf("%d\n", StackSize(ps));
 
 
 }
