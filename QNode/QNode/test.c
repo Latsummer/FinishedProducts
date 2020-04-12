@@ -17,6 +17,7 @@ void test1(Queue* q)
 	QueuePop(q);
 
 	QueueBack(q);
+	QueueFront(q);
 
 }
 
