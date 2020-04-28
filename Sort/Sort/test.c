@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include"Sort.h"
+
+typedef void(*FUNC) (int*, int);
+FUNC sort[] =
+{
+	printarr,//0
+	insert_Sort,//1
+	shell_Sort,//2
+	select_Sort,//3
+	select2_Sort,//4
+	heap_Sort//5
+};
+
+void sort_test(int* bigarr, int size)
+{
+	sort[0](bigarr, size);
+	sort[5](bigarr, size);
+	sort[0](bigarr, size);
+}
+
+void time_test(int* bigarr, int n)
+{
+	int* copy = (int*)malloc(sizeof(int)* n);
+	memcpy(copy, bigarr, 4 * n);
+	
+	size_t begin = clock();
+	sort[5](bigarr, n);
+	size_t end = clock();
+
+	printf("%d ms\n", end - begin);
+
+	begin = clock();
+	sort[3](copy, n);
+	end = clock();
+	printf("%d ms\n", end - begin);
+
+}
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+	int n = 0;
+	scanf("%d", &n);
+	int* bigarr = (int*)malloc(sizeof(int)* n);
+	for (int i = 0; i < n; i++)
+		bigarr[i] = rand()%100;
+	
+	//sort_test(bigarr, n);
+	time_test(bigarr, n);
+
+	return 0;
+}
