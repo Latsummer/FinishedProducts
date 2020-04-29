@@ -137,7 +137,83 @@ void heap_Sort(int* arr, int size)
 	while (size > 1)
 	{
 		swap(arr, 0, size - 1);
-		size--;
+		size--;//循环删除堆顶元素并向下调整
 		shiftDown(arr, size, 0);
 	}
+}
+
+void bubble_Sort(int* arr, int size)
+{
+	while (size)
+	{
+		int flag = 1;
+		int end = size;
+		for (int i = 1; i < end; i++)
+		{
+			if (arr[i - 1] > arr[i])
+			{
+				swap(arr, i - 1, i);
+				flag = 0;
+			}
+		}
+		if (flag)
+			break;
+		size--;
+	}
+}
+
+int partion(int* arr, int begin, int end)//hora划分
+{
+	int key = arr[begin];//基准值
+	int start = begin;
+	while (begin < end)
+	{
+		while (end > begin && arr[end] >= key)
+			end--;//从后往前找到第一个小于key的值
+		while (end > begin && arr[begin] <= key)
+			begin++;//从前向后找到第一个大于key的值
+		swap(arr, begin, end);//交换二者
+	}
+	swap(arr, start, begin);//交换基准值和相遇位置
+	return begin;//返回改变后的基准值的索引
+}
+
+int partion2(int* arr, int begin, int end)//挖坑法
+{
+	int key = arr[begin];//挖掉基准值
+	while (end > begin)
+	{
+		while (end > begin && arr[end] >= key)
+			end--;//先从后往前找到第一个小于key的值
+		arr[begin] = arr[end];//填补基准值挖出来的坑
+		while (end > begin && arr[begin] <= key)
+			begin++;//从前往后找到第一个大于key的值
+		arr[end] = arr[begin];//填补上一步挖的坑
+	}
+	arr[begin] = key;//相遇时把基准值塞进来
+	return begin;
+}
+
+int partion3(int* arr, int begin, int end)//前后指针法
+{
+	int prev = begin;//prev：最后一个小于基准值的位置
+	int cur = prev + 1;//cur：新发现的下一个小于基准值的位置
+	int key = arr[begin];//基准值
+	while (cur <= end)
+	{
+		if (arr[cur] < key && ++prev != cur)//新发现的小于基准值的数据和prev不连续，说明中间含有大于基准值的数据，故交换
+			swap(arr, cur, prev);//小数据向前，大数据向后
+		cur++;
+	}
+	swap(arr, begin, prev);
+	return prev;
+}
+
+void quick_Sort(int* arr, int begin, int end)//快速排序
+{
+	if (begin >= end)
+		return;
+	int keyPos = partion3(arr, begin, end);
+	quick_Sort(arr, begin, keyPos - 1);
+	quick_Sort(arr, keyPos + 1, end);
 }

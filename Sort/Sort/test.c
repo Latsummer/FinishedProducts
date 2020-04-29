@@ -9,13 +9,15 @@ FUNC sort[] =
 	shell_Sort,//2
 	select_Sort,//3
 	select2_Sort,//4
-	heap_Sort//5
+	heap_Sort,//5
+	bubble_Sort//6
 };
 
 void sort_test(int* bigarr, int size)
 {
 	sort[0](bigarr, size);
-	sort[5](bigarr, size);
+	//sort[6](bigarr, size);
+	quick_Sort(bigarr, 0, size - 1);
 	sort[0](bigarr, size);
 }
 
@@ -25,13 +27,14 @@ void time_test(int* bigarr, int n)
 	memcpy(copy, bigarr, 4 * n);
 	
 	size_t begin = clock();
-	sort[5](bigarr, n);
+	sort[2](bigarr, n);
 	size_t end = clock();
 
 	printf("%d ms\n", end - begin);
 
 	begin = clock();
-	sort[3](copy, n);
+	//sort[5](copy, n);
+	quick_Sort(bigarr, 0, n - 1);
 	end = clock();
 	printf("%d ms\n", end - begin);
 
