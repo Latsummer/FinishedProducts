@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Sort.h"
+#include"Stack.h"
+#include"Queue.h"
 
 void swap(int* arr, int left, int right)
 {
@@ -162,8 +164,31 @@ void bubble_Sort(int* arr, int size)
 	}
 }
 
+int getMid(int* arr, int begin, int end)
+{
+	int mid = begin + (end - begin) / 2;
+	if (arr[begin] < arr[end])
+	{
+		if (arr[mid] < arr[end])
+			return mid;
+		else
+			return arr[begin] > arr[end] ? begin : end;
+	}
+	else
+	{
+		if (arr[end] < arr[mid])
+			return mid;
+		else
+			return arr[begin] < arr[end] ? begin : end;
+	}
+}
+
 int partion(int* arr, int begin, int end)//hora划分
 {
+	//int key = arr[begin];//基准值
+	int mid = getMid(arr, begin, end);
+	swap(arr, mid, begin);
+
 	int key = arr[begin];//基准值
 	int start = begin;
 	while (begin < end)
@@ -180,6 +205,9 @@ int partion(int* arr, int begin, int end)//hora划分
 
 int partion2(int* arr, int begin, int end)//挖坑法
 {
+	int mid = getMid(arr, begin, end);
+	swap(arr, mid, begin);
+
 	int key = arr[begin];//挖掉基准值
 	while (end > begin)
 	{
@@ -196,6 +224,9 @@ int partion2(int* arr, int begin, int end)//挖坑法
 
 int partion3(int* arr, int begin, int end)//前后指针法
 {
+	int mid = getMid(arr, begin, end);
+	swap(arr, mid, begin);
+
 	int prev = begin;//prev：最后一个小于基准值的位置
 	int cur = prev + 1;//cur：新发现的下一个小于基准值的位置
 	int key = arr[begin];//基准值
@@ -213,7 +244,109 @@ void quick_Sort(int* arr, int begin, int end)//快速排序
 {
 	if (begin >= end)
 		return;
-	int keyPos = partion3(arr, begin, end);
+	int keyPos = partion2(arr, begin, end);
 	quick_Sort(arr, begin, keyPos - 1);
 	quick_Sort(arr, keyPos + 1, end);
+}
+
+//栈实现非递归
+void quick_Sort_NoR_Stack(int* arr, int size)
+{
+	Stack st;
+	StackInit(&st);
+	if (size > 1)
+	{
+		StackPush(&st, size - 1);
+		StackPush(&st, 0);
+	}
+	while (!StackEmpty(&st))
+	{
+		int begin = StackTop(&st);
+		StackPop(&st);
+		int end = StackTop(&st);
+		StackPop(&st);
+
+		int keyPos = partion2(arr, begin, end);
+		 
+		if (keyPos + 1 < end)
+		{
+			StackPush(&st, end);
+			StackPush(&st, keyPos + 1);
+		}
+		if (begin < keyPos - 1)
+		{
+			StackPush(&st, keyPos - 1);
+			StackPush(&st, begin);
+		}
+	}
+}
+
+//队列实现非递归
+void quick_Sort_NoR_Queue(int* arr, int size)
+{
+	Queue q;
+	QueueInit(&q);
+	if (size > 1)
+	{
+		QueuePush(&q, 0);
+		QueuePush(&q, size - 1);
+	}
+	while (!QueueEmpty(&q))
+	{
+		int begin = QueueFront(&q);
+		QueuePop(&q);
+		int end = QueueFront(&q);
+		QueuePop(&q);
+
+		int keyPos = partion2(arr, begin, end);
+
+		if (begin < keyPos - 1)
+		{
+			QueuePush(&q, begin);
+			QueuePush(&q, keyPos - 1);
+		}
+		if (end > keyPos + 1)
+		{
+			QueuePush(&q, keyPos + 1);
+			QueuePush(&q, end);
+		}
+	}
+}
+
+void merge(int* arr, int begin, int mid, int end, int* tmp)
+{
+	int begin1 = begin, end1 = mid, begin2 = mid + 1, end2 = end;
+	int idx = begin;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (arr[begin1] <= arr[begin2])
+			tmp[idx++] = arr[begin1++];
+		else
+			tmp[idx++] = arr[begin2++];
+	}
+	if (begin1 <= end1)
+		memcpy(tmp + idx, arr + begin1, sizeof(int)* (end1 - begin1 + 1));
+	if (begin2 <= end2)
+		memcpy(tmp + idx, arr + begin2, sizeof(int)*(end2 - begin2 + 1));
+	memcpy(arr + begin, tmp + begin, sizeof(int)* (end - begin + 1));
+}
+
+void merge_SortR(int* arr, int begin, int end, int* tmp)
+{
+	if (begin >= end)
+		return;
+	int mid = begin + (end - begin) / 2;
+
+	merge_SortR(arr, begin, mid, tmp);
+	merge_SortR(arr, mid + 1, end, tmp);
+
+	merge(arr, begin, mid, end, tmp);
+}
+
+void merge_Sort(int* arr, int size)
+{
+	int* tmp = (int*)malloc(sizeof(int)* size);
+
+	merge_SortR(arr, 0, size - 1, tmp);
+	free(tmp);
 }

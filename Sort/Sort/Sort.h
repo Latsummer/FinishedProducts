@@ -19,4 +19,6 @@ int partion(int* arr, int begin, int end);//hora划分
 int partion2(int* arr, int begin, int end);//挖坑法
 int partion3(int* arr, int begin, int end);//前后指针法
 void quick_Sort(int* arr, int begin, int end);//快速排序
-
+void quick_Sort_NoR_Stack(int* arr, int size);//栈实现非递归
+void quick_Sort_NoR_Queue(int* arr, int size);//队列实现非递归
+void merge_Sort(int* arr, int size);//归并排序
