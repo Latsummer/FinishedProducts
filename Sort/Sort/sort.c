@@ -350,3 +350,30 @@ void merge_Sort(int* arr, int size)
 	merge_SortR(arr, 0, size - 1, tmp);
 	free(tmp);
 }
+
+void count_Sort(int* arr, int size)
+{
+	int min = arr[0], max = arr[0];
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] < min)
+			min = arr[i];
+		if (arr[i] > max)
+			max = arr[i];
+	}
+	int range = max - min + 1;
+
+	int* countArr = (int*)malloc(sizeof(int)* range);
+	memset(countArr, 0, sizeof(int)* range);
+
+	for (int i = 0; i < size; i++)
+		countArr[arr[i] - min]++;
+
+	int idx = 0;
+	for (int i = 0; i < range; i++)
+	{
+		while (countArr[i]--)
+			arr[idx++] = i + min;
+	}
+	free(countArr);
+}

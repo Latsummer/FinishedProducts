@@ -13,13 +13,14 @@ FUNC sort[] =
 	bubble_Sort,//6
 	quick_Sort_NoR_Stack,//7
 	quick_Sort_NoR_Queue,//8
-	merge_Sort//9
+	merge_Sort,//9
+	count_Sort,//10
 };
 
 void sort_test(int* bigarr, int size)
 {
 	sort[0](bigarr, size);
-	sort[9](bigarr, size);
+	sort[10](bigarr, size);
 	//quick_Sort(bigarr, 0, size - 1);
 	sort[0](bigarr, size);
 }
