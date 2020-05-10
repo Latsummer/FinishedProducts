@@ -351,6 +351,29 @@ void merge_Sort(int* arr, int size)
 	free(tmp);
 }
 
+void merge_Sort_NoR(int* arr, int size)
+{
+	int* tmp = (int*)malloc(sizeof(int)* size);
+	int k = 1;
+	while (k < size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			int begin = i;
+			int mid = i + k + 1;
+			if (mid >= size - 1)
+				continue;
+
+			int end = i + 2 * k - 1;
+			if (end >= size)
+				end = size - 1;
+
+			merge(arr, begin, mid, end, tmp);
+		}
+		k *= 2;
+	}
+}
+
 void count_Sort(int* arr, int size)
 {
 	int min = arr[0], max = arr[0];

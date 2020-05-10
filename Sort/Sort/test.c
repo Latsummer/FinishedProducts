@@ -14,7 +14,8 @@ FUNC sort[] =
 	quick_Sort_NoR_Stack,//7
 	quick_Sort_NoR_Queue,//8
 	merge_Sort,//9
-	count_Sort,//10
+	merge_Sort_NoR,//10
+	count_Sort,//11
 };
 
 void sort_test(int* bigarr, int size)
@@ -53,8 +54,8 @@ int main()
 	for (int i = 0; i < n; i++)
 		bigarr[i] = rand();
 	
-	//sort_test(bigarr, n);
-	time_test(bigarr, n);
+	sort_test(bigarr, n);
+	//time_test(bigarr, n);
 
 	return 0;
 }

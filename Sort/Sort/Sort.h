@@ -22,4 +22,5 @@ void quick_Sort(int* arr, int begin, int end);//快速排序
 void quick_Sort_NoR_Stack(int* arr, int size);//栈实现非递归
 void quick_Sort_NoR_Queue(int* arr, int size);//队列实现非递归
 void merge_Sort(int* arr, int size);//归并排序
+void merge_Sort_NoR(int* arr, int size);//归并排序非递归
 void count_Sort(int* arr, int size);//计数排序，非比较
