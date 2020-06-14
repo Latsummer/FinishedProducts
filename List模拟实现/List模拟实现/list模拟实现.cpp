@@ -59,7 +59,7 @@ namespace zzl
 			return *this;
 		}
 
-		Self& operator--(int)
+		Self operator--(int)
 		{
 			Self tmp(*this);
 			_pNode = _pNode->_pPre;
@@ -87,9 +87,6 @@ namespace zzl
 		typedef Node* PNode;
 		typedef ListIterator<T, T&, T*> iterator;
 		typedef ListIterator<T, const T&, const T&> const_iterator;
-	//public:
-		///////////////////////////////////////////////////////////////
-		// List的构造
 		list()
 		{
 			CreateHead();
@@ -133,8 +130,6 @@ namespace zzl
 			_pHead = nullptr;
 		}
 
-		///////////////////////////////////////////////////////////////
-		// List Iterator
 		iterator begin()
 		{
 			return iterator(_pHead->_pNext);
@@ -155,8 +150,6 @@ namespace zzl
 			return const_iterator(_pHead);
 		}
 
-		///////////////////////////////////////////////////////////////
-		// List Capacity
 		size_t size()const
 		{
 			PNode cur = _pHead->_pNext;
@@ -173,8 +166,6 @@ namespace zzl
 		{
 			return size() == 0;
 		}
-		////////////////////////////////////////////////////////////
-		// List Access
 		T& front()
 		{
 			assert(!empty());
@@ -219,7 +210,6 @@ namespace zzl
 			erase(begin()); 
 		}
 
-		// 在pos位置前插入值为val的节点
 		iterator insert(iterator pos, const T& val)
 		{
 			PNode node = new Node(val);
@@ -234,7 +224,6 @@ namespace zzl
 			return iterator(node);
 		}
 
-		// 删除pos位置的节点，返回该节点的下一个位置
 		iterator erase(iterator pos)
 		{
 			if (pos != end())
