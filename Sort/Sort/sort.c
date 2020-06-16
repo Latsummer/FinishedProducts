@@ -167,7 +167,7 @@ void bubble_Sort(int* arr, int size)
 int getMid(int* arr, int begin, int end)
 {
 	int mid = begin + (end - begin) / 2;
-	if (arr[begin] < arr[end])
+	if (arr[begin] < arr[mid])
 	{
 		if (arr[mid] < arr[end])
 			return mid;
