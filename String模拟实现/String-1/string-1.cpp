@@ -64,12 +64,12 @@ using namespace std;
 //	return 0;
 //}
 
-namespace bit
+namespace zzl
 {
 	class string
 	{
-	friend ostream& operator<<(ostream& _cout, const bit::string& s);
-	friend istream& operator>>(istream& _cin, bit::string& s);
+	friend ostream& operator<<(ostream& _cout, const zzl::string& s);
+	friend istream& operator>>(istream& _cin, zzl::string& s);
 	public:
 	typedef char* iterator;
 	public:
@@ -371,14 +371,14 @@ namespace bit
 	};
 
 };
-ostream& bit::operator<<(ostream& _cout, const bit::string& s)
+ostream& zzl::operator<<(ostream& _cout, const zzl::string& s)
 {
 	for (size_t i = 0; i < s.size(); i++)
 		_cout << s[i];
 	return _cout;
 }
 
-istream& bit::operator>>(istream& _cin, bit::string& s)
+istream& zzl::operator>>(istream& _cin, zzl::string& s)
 {
 	char* str = (char*)malloc(sizeof(char) * 100);
 	char* buf = str;
@@ -409,9 +409,9 @@ istream& bit::operator>>(istream& _cin, bit::string& s)
 
 int main()
 {
-	bit::string s1("0123456789");
+	zzl::string s1("0123456789");
 	cout << s1 << endl;
-	bit::string s2;
+	zzl::string s2;
 	cin >> s2;
 	cout << s2 << endl;
 	return 0;
