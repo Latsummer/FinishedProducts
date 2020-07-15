@@ -243,16 +243,31 @@ private:
 		Node* subR = parent->_right;
 		Node* subRL = subR->_left;
 
-		subR->_left = parent;
+		//subR->_left = parent;
 		parent->_right = subRL;
 
 		if (subRL)
 			subRL->_parent = parent;
 
-		if (parent == _pHead->_parent)
+		subR->_left = parent;
+		Node* g = parent->_parent;
+		subR->_parent = g;
+		parent->_parent = subR;
+
+		if (g == _header)
+			_header->_parent = subR;
+		else
 		{
-			_pHead->_parent = subR;
-			subR->_parent = nullptr;
+			if (parent == g->_left)
+				g->_left = subR;
+			else
+				g->_right = subR;
+		}
+
+		/*if (parent == _header->_parent)
+		{
+			_header->_parent = subR;
+			subR->_parent = parent->_parent;
 		}
 		else
 		{
@@ -264,7 +279,7 @@ private:
 				g->_right = subR;
 		}
 
-		parent->_parent = subR;
+		parent->_parent = subR;*/
 	}
 	// 右单旋
 	void RotateR(Node* parent)
@@ -272,16 +287,32 @@ private:
 		Node* subL = parent->_left;
 		Node* subLR = subL->_right;
 
-		subL->_right = parent;
+		//subL->_right = parent;
 		parent->_left = subLR;
 
 		if (subLR)
 			subLR->_parent = parent;
 
-		if (parent == _pHead->_parent)
+		subL->_right = parent;
+
+		Node* g = parent->_parent;
+		parent->_parent = subL;
+		subL->_parent = g;
+
+		if (g == _header)
+			_header->_parent = subL;
+		else
 		{
-			_pHead->_parent = subL;
-			subL->_parent = nullptr;
+			if (parent == g->_left)
+				g->_left = subL;
+			else
+				g->_right = subL;
+		}
+
+		/*if (parent == _header->_parent)
+		{
+			_header->_parent = subL;
+			subL->_parent = parent->_parent;
 		}
 		else
 		{
@@ -293,7 +324,7 @@ private:
 				g->_right = subL;
 		}
 
-		parent->_parent = subL;
+		parent->_parent = subL;*/
 	}
 	// 为了操作树简单起见：获取根节点
 	Node*& GetRoot()
